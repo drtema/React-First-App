@@ -1,8 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import myData from './data/data.json';
 
 function App() {
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +20,9 @@ function App() {
         >
           Learn React
         </a>
+        <p>
+          { myData[0].id }
+        </p>
       </header>
     </div>
   );
