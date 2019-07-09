@@ -1,26 +1,16 @@
 import React from 'react';
-<<<<<<< HEAD
+import './css/myApp.css';
 import './css/myApp.css';
 import myData from './data/data.json';
+
 
 // создание строки таблицы
-=======
-// import logo from './logo.svg';
-// import './App.css';
-import './css/myApp.css';
-import myData from './data/data.json';
-
-
->>>>>>> 50083245c50c0c8902b1b9a26dba084e8dd93d25
 function TableRow(props) {
     return (
         <tr id={props.id}
             onClick={(e) => props.click(e.currentTarget.id)}
-<<<<<<< HEAD
 
 // ??? как написать так, чтобы класс отображался в теге HTML только если он установлен???
-=======
->>>>>>> 50083245c50c0c8902b1b9a26dba084e8dd93d25
             className={props.cname}
         >
             <td>{props.name}</td>
@@ -30,11 +20,7 @@ function TableRow(props) {
 }
 
 
-<<<<<<< HEAD
 // Рендеринг таблицы. Можно использовать функцию.
-=======
-// Рендеринг одной строки таблицы
->>>>>>> 50083245c50c0c8902b1b9a26dba084e8dd93d25
 class TableCats extends React.Component{
     render(){
         const rows = this.props.rows;
@@ -55,11 +41,7 @@ class TableCats extends React.Component{
 }
 
 
-<<<<<<< HEAD
 // Рендеринг кнопки
-=======
-// Рендеринг таблицы и контроль состояния строк таблицы
->>>>>>> 50083245c50c0c8902b1b9a26dba084e8dd93d25
 function ActionButton(props) {
     return (
         <button onClick={props.active}>
@@ -79,18 +61,12 @@ class App extends React.Component{
         this.handleClickRow = this.handleClickRow.bind(this);
     }
 
-<<<<<<< HEAD
     // обработчик клика на строке таблицы
-=======
->>>>>>> 50083245c50c0c8902b1b9a26dba084e8dd93d25
     handleClickRow(id) {
         this.setState({idRow: id.toString()});
     }
 
-<<<<<<< HEAD
     // обработчик нажатия кнопки
-=======
->>>>>>> 50083245c50c0c8902b1b9a26dba084e8dd93d25
     handleClickButton() {
         if (this.state.idRow !== '') {
             alert('ID row: ' + this.state.idRow);
