@@ -1,84 +1,90 @@
 import React from 'react';
 // import logo from './logo.svg';
-import './App.css';
+// import './App.css';
 import './css/myApp.css';
 import myData from './data/data.json';
 
-function GetTable(props) {
-    const rows = props.rows;
-    let listRows = rows.map((row) =>
-        <tr id={row.id} onClick={selectRow}>
-            <td>{row.name}</td>
-            <td><img src={row.imageUrl} /></td>
-        </tr>
-    )
 
+function TableRow(props) {
     return (
-        <table>
-            {listRows}
-        </table>
+        <tr id={props.id}
+            onClick={(e) => props.click(e.currentTarget.id)}
+            className={props.cname}
+        >
+            <td>{props.name}</td>
+            <td><img src={props.src} alt={props.name} /></td>
+        </tr>
     );
 }
 
-function selectRow() {
 
-}
-
-
-class ActionButton extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {isSelectRow : false};
-
-        this.handleClick = this.handleClick.bind(this);
-    }
-
-    setSelectedRow(props){
-        if (props.id > 0) {
-            this.setState(state => ({
-                    isSelectRow: true
-                })
-            )
-        }
-    }
-
-
-    handleClick(props){
-        if (this.state.isSelectRow)
-            alert(props.id);
-    }
-
-    render() {
+// Рендеринг одной строки таблицы
+class TableCats extends React.Component{
+    render(){
+        const rows = this.props.rows;
         return (
-            <button onClick={this.handleClick}>
-                Submit
-            </button>
+            <table>
+                {rows.map((row) =>
+                    <TableRow
+                        id={row.id}
+                        name={row.name}
+                        src={row.imageUrl}
+                        click={this.props.activeRow}
+                        cname={(row.id.toString() === this.props.activeID) ? 'active' : ''}
+                    />
+                )}
+            </table>
         );
     }
 }
 
-function App() {
-    const rowsArray = myData;
+
+// Рендеринг таблицы и контроль состояния строк таблицы
+function ActionButton(props) {
     return (
-        <div className="App">
-            <header className="App-header">
-                {/*<img src={logo} className="App-logo" alt="logo" />*/}
-                {/*<p>*/}
-                {/*    Edit <code>src/App.js</code> and save to reload.*/}
-                {/*</p>*/}
-                {/*<a*/}
-                {/*    className="App-link"*/}
-                {/*    href="https://reactjs.org"*/}
-                {/*    target="_blank"*/}
-                {/*    rel="noopener noreferrer"*/}
-                {/*>*/}
-                {/*    Learn React*/}
-                {/*</a>*/}
-                <GetTable rows={rowsArray} />
-                <ActionButton />
-            </header>
-        </div>
+        <button onClick={props.active}>
+            Узнай ID
+        </button>
     );
+}
+
+
+// Контроль всего приложения: состояния таблицы и данных для кнопки
+class App extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {idRow: ""};
+
+        this.handleClickButton = this.handleClickButton.bind(this);
+        this.handleClickRow = this.handleClickRow.bind(this);
+    }
+
+    handleClickRow(id) {
+        this.setState({idRow: id.toString()});
+    }
+
+    handleClickButton() {
+        if (this.state.idRow !== '') {
+            alert('ID row: ' + this.state.idRow);
+        }
+    }
+
+    render() {
+        let rowsArray = myData;
+        return (
+            <div className="App">
+                <header className="App-header">
+
+                    <TableCats
+                        rows={rowsArray}
+                        activeRow={this.handleClickRow}
+                        activeID={this.state.idRow}
+                    />
+                    <ActionButton active={this.handleClickButton} />
+                </header>
+            </div>
+        );
+    }
 }
 
 export default App;
