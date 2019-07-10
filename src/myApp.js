@@ -7,11 +7,10 @@ import myData from './data/data.json';
 // создание строки таблицы
 function TableRow(props) {
     return (
+
         <tr id={props.id}
             onClick={(e) => props.click(e.currentTarget.id)}
-
-// ??? как написать так, чтобы класс отображался в теге HTML только если он установлен???
-            className={props.cname}
+            className={props.cname ? props.cname : null}
         >
             <td>{props.name}</td>
             <td><img src={props.src} alt={props.name} /></td>
