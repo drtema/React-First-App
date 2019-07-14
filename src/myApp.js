@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { Component, useState } from 'react';
 import './css/myApp.css';
-import './css/myApp.css';
-import myData from './data/data.json';
+import {
+    Button,
+    Modal,
+    Table,
+} from 'react-bootstrap';
 
+import myData from './data/data.json';
 
 // создание строки таблицы
 function TableRow(props) {
+    // случайный выбор класса для цвета фона строки
+    const clr = ['clr-purple', 'clr-orange', 'clr-yellow', 'clr-green', 'clr-dark'];
+    let clss = clr[Math.floor(Math.random()*(clr.length+1))];
+
     return (
 
         <tr id={props.id}
             onClick={(e) => props.click(e.currentTarget.id)}
-            className={props.cname ? props.cname : null}
+            className={props.cname ? props.cname : clss}
         >
             <td>{props.name}</td>
             <td><img src={props.src} alt={props.name} /></td>
@@ -20,32 +28,58 @@ function TableRow(props) {
 
 
 // Рендеринг таблицы. Можно использовать функцию.
-class TableCats extends React.Component{
+class TableCats extends Component{
     render(){
         const rows = this.props.rows;
         return (
-            <table>
-                {rows.map((row) =>
-                    <TableRow
-                        id={row.id}
-                        name={row.name}
-                        src={row.imageUrl}
-                        click={this.props.activeRow}
-                        cname={(row.id.toString() === this.props.activeID) ? 'active' : ''}
-                    />
-                )}
-            </table>
+            <Table bordered>
+                <tbody>
+                    {rows.map((row) =>
+                        <TableRow
+                            id={row.id}
+                            key={row.id}
+                            name={row.name}
+                            src={row.imageUrl}
+                            click={this.props.activeRow}
+                            cname={(row.id.toString() === this.props.activeID) ? 'active' : ''}
+                        />
+                    )}
+                </tbody>
+            </Table>
         );
     }
 }
 
 
 // Рендеринг кнопки
-function ActionButton(props) {
+function ActionButton(idRow) {
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => { if (idRow.idRow) setShow(true);}
+
     return (
-        <button onClick={props.active}>
-            Узнай ID
-        </button>
+        <>
+            <Button
+                variant={'secondary'}
+                size="md"
+                onClick={handleShow}
+            >
+                Узнай ID
+            </Button>
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>ID select row</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>ID select row is {idRow.idRow}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                    OK
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </>
     );
 }
 
@@ -56,20 +90,12 @@ class App extends React.Component{
         super(props);
         this.state = {idRow: ""};
 
-        this.handleClickButton = this.handleClickButton.bind(this);
         this.handleClickRow = this.handleClickRow.bind(this);
     }
 
     // обработчик клика на строке таблицы
     handleClickRow(id) {
         this.setState({idRow: id.toString()});
-    }
-
-    // обработчик нажатия кнопки
-    handleClickButton() {
-        if (this.state.idRow !== '') {
-            alert('ID row: ' + this.state.idRow);
-        }
     }
 
     render() {
@@ -83,8 +109,10 @@ class App extends React.Component{
                         activeRow={this.handleClickRow}
                         activeID={this.state.idRow}
                     />
-                    <ActionButton active={this.handleClickButton} />
+                    {/*<ActionButton active={this.handleClickButton} />*/}
+                    <ActionButton idRow={this.state.idRow}/>
                 </header>
+                {/*<AppStrap />*/}
             </div>
         );
     }

@@ -3,7 +3,7 @@
 }
 
 .App-header {
-    background-color: #282c34;
+    background-color: #999;
     /*min-height: 100vh;*/
     display: flex;
     flex-direction: column;
@@ -13,19 +13,9 @@
     color: white;
 }
 
-table {
+.table {
     width: 90%;
-}
-
-tr {
-    height: 150px;
-}
-table tr {
-    width: 100%;
-}
-
-table tr:hover {
-    color: #61dafb;
+    color: #fff;
 }
 
 td {
@@ -37,12 +27,32 @@ td img {
     width: auto;
 }
 
-.active {
-    color: crimson;
-    background-color: #222 ;
+tr.clr-purple {
+    background-color: #6610f2 ;
+}
+tr.clr-orange {
+    background-color: #fd7e14 ;
+}
+tr.clr-yellow {
+    background-color: #ffc107 ;
+}
+tr.clr-green {
+    background-color: #28a745 ;
+}
+tr.clr-dark {
+    background-color: #343a40 ;
 }
 
-.active:hover {
-    color: crimson;
-    background-color: #222;
+tr:hover {
+    font-size: 1.1em;
+}
+
+tr.active {
+    color: black;
+    background-color: #fff ;
+}
+
+tr.active:hover {
+    color: black;
+    background-color: #fff;
 }
