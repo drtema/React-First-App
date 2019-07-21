@@ -1,21 +1,25 @@
 
 import React from "react";
 import { Table } from "react-bootstrap";
-import { ThemeContext } from "./themeContext";
+import { ThemeContext } from "../data/themeContext";
 
 // создание строки таблицы
 class TableRow extends React.Component {
+    static  x=0;
+
     render() {
+        console.log('---', TableRow.x+1);
         const theme = this.context;             // имя темы из App
-        const bgColor = 'bg-' + theme;          // имя класса темы
-        let isSelect = bgColor + ' ' + this.props.cname; // добавление класса выделенной строки
+        // const bgColor = 'bg-' + theme;          // имя класса темы
+        let isSelect = this.props.cname ? theme + ' ' + this.props.cname : theme; // добавление класса выделенной строки
+
 
 
         return (
 
             <tr id={this.props.id}
                 onClick={(e) => this.props.click(e.currentTarget.id)}
-                className={this.props.cname ? isSelect : bgColor}
+                className={isSelect}
             >
                 <td>{this.props.name}</td>
                 <td><img src={this.props.src} alt={this.props.name} /></td>

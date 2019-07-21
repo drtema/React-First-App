@@ -1,10 +1,28 @@
 body {
   max-width: 100%;
   margin: 0;
+  padding: 0 50px;
+  text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
 }
 
+.table {
+  min-width: 100%;
+}
+
+.table tr td {
+  width: 50%;
+}
+
+.table tr td img {
+  height: 100px;
+}
+
+.active, .active:hover {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+}

@@ -8,7 +8,6 @@ export const themes = {
          'danger',
          'info',
          'warning',
-         'active',
          'secondary',
          'light',
          'dark',
