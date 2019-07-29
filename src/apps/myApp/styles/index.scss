@@ -1,0 +1,32 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(14px + 2vmin);
+}
+
+.table {
+  min-width: 100%;
+  margin-bottom: 0;
+
+  tr td {
+    width: 50%;
+
+    img {
+      height: 100px;
+    }
+  }
+}
+
+table + button {
+  margin-bottom: 2rem;
+}
+
+.active, .active:hover {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+}

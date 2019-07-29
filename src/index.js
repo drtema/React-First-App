@@ -1,35 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './css/index.css';
 
-// import App from './App';
-import App from './myApp';
-import PureApp from './myPureApp'
-import * as serviceWorker from './serviceWorker';
+// import * as serviceWorker from './serviceWorker';
+
+import './styles/index.scss';
 
 
+import Articles from './apps/articles';
+// import App from './apps/myApp';
+import PureApp from './apps/myPureApp';
+
+
+//---------------------------------------------------------
+// Раскоментировать для подключения react-perf-devtool
 //
-// var {registerObserver} = require('react-perf-devtool')
-//
-// // Simple, no?
-// registerObserver()
+//let {registerObserver} = require('react-perf-devtool');
+//registerObserver();
+//---------------------------------------------------------
+
 
     function Main() {
         return (
             <>
-                <App />;
+                <Articles />
+                {/*<App />*/}
                 <PureApp />
             </>
         )
     }
 
-// ReactDOM.render(<App />, document.getElementById('root'));
 ReactDOM.render(<Main />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 
-serviceWorker.unregister();
+// serviceWorker.unregister();
 

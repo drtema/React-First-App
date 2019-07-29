@@ -1,13 +1,15 @@
 import React from 'react';
-import TableCats from './purecomponents/tableCats';
-import ActionButton from './purecomponents/actionButton';
-import { ThemeContext, themes } from "./data/themeContext";
+import TableCats from './components/tableCats';
+import ActionButton from './components/actionButton';
+import { ThemeContext, themes } from "../../data/themeContext";
 
-import myData from './data/data.json';
+import "./styles/index.scss";
+
+import myData from '../../data/data.json';
 
 
 // Контроль всего приложения: состояния таблицы и данных для кнопки
-class PureApp extends React.Component{
+class App extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -15,13 +17,14 @@ class PureApp extends React.Component{
             theme: themes.theme[3],
         };
 
+
         this.handleClickRow = this.handleClickRow.bind(this);
     }
-
     // обработчик клика на строке таблицы
     handleClickRow(id) {
         this.setState({
             idRow: id.toString(),       // хранение выбранной строки
+            // theme: themes.theme[id-1],  // устновка состояния Темы
         });
     }
 
@@ -30,7 +33,7 @@ class PureApp extends React.Component{
         return (
             <div className="App">
                 <header className="App-header">
-                        <ThemeContext.Provider value={this.state.theme}>
+                    <ThemeContext.Provider value={this.state.theme}>
                         <TableCats
                             rows={rowsArray}
                             activeRow={this.handleClickRow}
@@ -41,11 +44,11 @@ class PureApp extends React.Component{
                             theme={this.state.theme}
                         />
                     </ThemeContext.Provider>
+
                 </header>
             </div>
         );
     }
 }
 
-
-export default PureApp;
+export default App;
