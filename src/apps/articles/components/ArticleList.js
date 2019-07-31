@@ -7,9 +7,16 @@ import {
 import Article from "./Article"
 
 export default class ArticleList extends React.Component {
-    state = {
-        openArticleID: null,
-    };
+    constructor(props){
+        super(props);
+
+        this.state = {
+            openArticleID: null,
+        };
+
+        // привязка метода здесь - приложение НЕ работает
+        // this.handleClick=this.handleClick.bind(this);
+    }
 
     handleClick = openArticleID => {
         this.setState({
@@ -23,6 +30,11 @@ export default class ArticleList extends React.Component {
                 article={article}
                 key={article.id}
                 isOpen={this.state.openArticleID === article.id}
+
+                //так выглядит передача пропса, при нерабочей привязке метода
+                // clickButton={this.handleClick(article.id)}
+
+                // привязка метода здесь - приложение работает
                 clickButton={this.handleClick.bind(this, article.id)}
             /> )
         );
